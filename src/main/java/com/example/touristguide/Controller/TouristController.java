@@ -37,5 +37,9 @@ public class TouristController {
         return new ResponseEntity<>(newAttraction, HttpStatus.CREATED);
     }
 
-
+    @PostMapping("/delete/{name}")
+    public ResponseEntity<String> deleteAttraction(@PathVariable String name){
+        String returnMessage = touristService.deleteAttraction(name);
+        return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
+    }
 }

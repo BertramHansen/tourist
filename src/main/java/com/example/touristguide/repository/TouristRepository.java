@@ -51,4 +51,15 @@ public class TouristRepository {
         return touristAttraction;
     }
 
+    public String deleteAttraction(String name){
+        String result = null;
+        for (TouristAttraction attraction : attractions){
+            if (attraction.getName().equalsIgnoreCase(name)){
+               result = attraction.getName() + " is deleted from the list";
+               return result;
+            }
+        }
+        return name + " was not found on the list";
+    }
+
 }
