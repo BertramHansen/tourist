@@ -51,12 +51,11 @@ public class TouristRepository {
         return touristAttraction;
     }
 
-    public String deleteAttraction(String name){
-        String result = null;
-        for (TouristAttraction attraction : attractions){
-            if (attraction.getName().equalsIgnoreCase(name)){
-               result = attraction.getName() + " is deleted from the list";
-               return result;
+    public String deleteAttraction(String name) {
+        for (TouristAttraction attraction : attractions) {
+            if (attraction.getName().equalsIgnoreCase(name)) {
+                attractions.remove(attraction); // Fjerner attraktionen fra listen
+                return attraction.getName() + " is deleted from the list";
             }
         }
         return name + " was not found on the list";
