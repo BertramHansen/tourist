@@ -61,4 +61,17 @@ public class TouristRepository {
         return name + " was not found on the list";
     }
 
+    public String updateAttraction(String name, TouristAttraction newAttraction){
+
+        for(TouristAttraction a : attractions){
+            if(a.getName().equalsIgnoreCase(name)){
+                a.setName(newAttraction.getName());
+                a.setDescription(newAttraction.getDescription());
+                return name + " has been updated to " + a.getName();
+            }
+        }
+
+        return name + "was not found on the list";
+    }
+
 }
