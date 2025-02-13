@@ -5,6 +5,7 @@ import com.example.touristguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +32,12 @@ public class TouristController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<TouristAttraction> getAttractionByName(@PathVariable String name, @RequestParam(required = false) String description) {
+    public String getAttractionByName(@PathVariable String name, @RequestParam(required = false) String description, Model model)  {
         TouristAttraction touristAttraction = touristService.findAttractionByName(name, description);
-        return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
+        model.addAttribute("touristAttraction", touristAttraction);
+        model.addAttribute("name", touristAttraction.getName());
+        model.addAttribute("description", touristAttraction.getDescription());
+        return "details";
     }
 
     @PostMapping("/add")
@@ -56,4 +60,5 @@ public class TouristController {
         System.out.println("We in the postmapping");
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
     }
+
 }

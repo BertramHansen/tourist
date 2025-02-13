@@ -6,33 +6,33 @@
     <link rel="stylesheet" href="/frontpage.css">
 </head>
 <body>
-    <header>
-        <h2></h2>
-        <img th:class="logo" src="/logo.png" alt="logo image">
-        <div>
-            <fieldset class="dropDown">
-                <legend >MENU</legend>
-                <select id="Roll-Down" name="rolldown">
-                    <option value=" "> </option>
-                    <option value="Tokyo">TOKYO</option>
-                    <option value="Fuji">FUJI </option>
-                    <option value="Kyoto">KYOTO</option>
-                    <option value="Osaka">OSAKA</option>
-                </select>
-            </fieldset>
-        </div>
-    </header>
+<header>
+    <h2></h2>
+    <img th:class="logo" src="/logo.png" alt="logo image">
+    <div>
+        <fieldset class="dropDown">
+            <legend>MENU</legend>
+            <select id="Roll-Down" name="rolldown">
+                <option value=""></option>
+                <option value="Tokyo">TOKYO</option>
+                <option value="Fuji">FUJI</option>
+                <option value="Kyoto">KYOTO</option>
+                <option value="Osaka">OSAKA</option>
+            </select>
+        </fieldset>
+    </div>
+</header>
 
 <section>
-<div th:class="image-row">
-    <div class="holdertokyo">
-        <img th:class="tokyo" src="/tokyo.jpg" alt="tokyo-img" style="width: 297px; margin-right: 5px;">
-        <h4>TOKYO</h4>
+    <div th:class="image-row">
+        <div class="holdertokyo">
+            <img th:class="tokyo" src="/tokyo.jpg" alt="tokyo-img" style="width: 297px; margin-right: 5px;">
+            <h4>TOKYO</h4>
+        </div>
+        <img th:class="osaka" src="osaka.jpg" alt="osaka-img" style="width: 297px; margin-right: 5px;">
+        <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
+        <img th:class="kyoto" src="kyoto1.jpg" alt="kyoto-img" style="width: 297px; margin-right: 5px;">
     </div>
-    <img th:class="osaka" src="osaka.jpg" alt="osaka-img" style="width: 297px; margin-right: 5px;">
-    <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
-    <img th:class="kyoto" src="kyoto1.jpg" alt="kyoto-img" style="width: 297px; margin-right: 5px;">
-</div>
     <a href="http://localhost:8080"
        target="_blank"> back to frontpage</a>
 </section>
