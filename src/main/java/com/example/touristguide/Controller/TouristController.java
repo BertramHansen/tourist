@@ -30,6 +30,12 @@ public class TouristController {
         return "index";
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<TouristAttraction>> actualGetAllAttractions(){
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
+        return new ResponseEntity<>(attractions, HttpStatus.OK);
+    }
+
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> getAttractionByName(@PathVariable String name, @RequestParam(required = false) String description) {
         TouristAttraction touristAttraction = touristService.findAttractionByName(name, description);
@@ -55,5 +61,11 @@ public class TouristController {
         String returnMessage = touristService.updateAttraction(name, newAttraction);
         System.out.println("We in the postmapping");
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
+    }
+
+    //TEST, delete later
+    @GetMapping("/swag")
+    public String benjaminTest(){
+        return "benjamins-experiment";
     }
 }
