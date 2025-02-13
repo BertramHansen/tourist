@@ -19,10 +19,15 @@ public class TouristController {
         this.touristService = touristService;
     }
 
+//    @GetMapping("")
+//    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
+//        List<TouristAttraction> attractions = touristService.getAllAttractions();
+//        return new ResponseEntity<>(attractions, HttpStatus.OK);
+//    }
+
     @GetMapping("")
-    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
-        List<TouristAttraction> attractions = touristService.getAllAttractions();
-        return new ResponseEntity<>(attractions, HttpStatus.OK);
+    public String getAllAttractions(){
+        return "index";
     }
 
     @GetMapping("/{name}")
