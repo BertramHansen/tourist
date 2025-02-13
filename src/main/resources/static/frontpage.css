@@ -1,0 +1,119 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+    background-color: #302327;
+    color: #CF9B95;
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+header .logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+header .dropDown {
+    background-color: #CA3E33;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+header select {
+    width: 100%;
+    padding: 10px;
+    background-color: #6F99CC;
+    color: white;
+    border: none;
+    font-size: 1rem;
+}
+
+/* Section with images */
+section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+}
+
+.image-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.holdertokyo{
+    max-width: 200px;
+    max-height: 1000px;
+    overflow: hidden;
+}
+
+.tokyo{
+    width: 100%;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+.holdertokyo:hover{
+    transform: scale(2,2);
+}
+
+h4{
+    position: absolute;
+    background-color: transparent !important;
+    color: #DFE9E5;
+}
+
+section .images img {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+section .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #6F99CC;
+    text-decoration: none;
+}
+
+section .back-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer styles */
+footer {
+    background-color: #461B27;
+    color: #CF9B95;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer .light-text {
+    font-size: 1.2rem;
+}
