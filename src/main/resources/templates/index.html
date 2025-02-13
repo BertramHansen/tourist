@@ -6,39 +6,48 @@
     <link rel="stylesheet" href="/frontpage.css">
 </head>
 <body>
-<header>
-    <h2></h2>
-    <img th:class="logo" src="/logo.png" alt="logo image">
-    <div>
-        <fieldset class="dropDown">
-            <legend>MENU</legend>
-            <select id="Roll-Down" name="rolldown">
-                <option value=""></option>
-                <option value="Tokyo">TOKYO</option>
-                <option value="Fuji">FUJI</option>
-                <option value="Kyoto">KYOTO</option>
-                <option value="Osaka">OSAKA</option>
-            </select>
-        </fieldset>
-    </div>
-</header>
-
-<section>
-    <div th:class="image-row">
-        <div class="holdertokyo">
-            <img th:class="tokyo" src="/tokyo.jpg" alt="tokyo-img" style="width: 297px; margin-right: 5px;">
-            <h4>TOKYO</h4>
+    <header>
+        <h2></h2>
+        <img th:class="logo" src="/logo.png" alt="logo image">
+        <div>
+            <fieldset class="dropDown">
+                <legend >MENU</legend>
+                <select id="Roll-Down" name="rolldown">
+                    <option value=" "> </option>
+                    <option value="Tokyo">TOKYO</option>
+                    <option value="Fuji">FUJI </option>
+                    <option value="Kyoto">KYOTO</option>
+                    <option value="Osaka">OSAKA</option>
+                </select>
+            </fieldset>
         </div>
-        <img th:class="osaka" src="osaka.jpg" alt="osaka-img" style="width: 297px; margin-right: 5px;">
-        <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
-        <img th:class="kyoto" src="kyoto1.jpg" alt="kyoto-img" style="width: 297px; margin-right: 5px;">
+    </header>
+        <fieldset th:class="links">
+            <p>Velkommen til turistguiden. Her kan du se turist attraktioner for hele Japan</p>
+            <a th:href="@{/attractions/all}" >Link to all attractions</a>
+
+            <ul>
+                <li><a th:href="@{/attractions/Fuji}" >Link to fuji</a></li>
+                <li><a th:href="@{/attractions/Tokyo Tower}">Link to Tokyo Tower</a></li>
+                <li><a th:href="@{/attractions/Nara Park}"> Link to Nara Park</a></li>
+            </ul>
+        </fieldset>
+<section>
+<div th:class="image-row">
+    <div class="holdertokyo">
+        <img th:class="tokyo" src="/tokyo.jpg" alt="tokyo-img" style="width: 297px; margin-right: 5px;">
+        <h4>TOKYO</h4>
     </div>
+    <img th:class="osaka" src="osaka.jpg" alt="osaka-img" style="width: 297px; margin-right: 5px;">
+    <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
+    <img th:class="kyoto" src="kyoto1.jpg" alt="kyoto-img" style="width: 297px; margin-right: 5px;">
+</div>
     <a href="http://localhost:8080"
        target="_blank"> back to frontpage</a>
 </section>
 
 <footer>
-    <p th:class="light-text"> Studiegruppe 2 </p>
+    <p th:class="light-text"> Studiegruppe 2  <a href="https://github.com/BertramHansen/tourist" target="_blank"> github Repo</a></p>
 </footer>
 </body>
 </html>

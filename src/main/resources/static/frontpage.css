@@ -10,7 +10,6 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Header styles */
 header {
     background-color: #302327;
     color: #CF9B95;
@@ -30,7 +29,7 @@ header .logo {
 
 header .dropDown {
     background-color: #CA3E33;
-    color: white;
+    color: #DFE9E5;
     border: none;
     padding: 10px;
     width: 200px;
@@ -46,7 +45,7 @@ header select {
     font-size: 1rem;
 }
 
-/* Section with images */
+
 section {
     display: flex;
     justify-content: center;
@@ -55,29 +54,38 @@ section {
     margin: 20px;
 }
 
-.image-row{
+.links {
+    background-color: #CF9B95;
+    color: #302327;
+    border-radius: inherit;
+    align-self: center;
+    padding: 20px;
+}
+
+.image-row {
     display: flex;
     justify-content: space-between;
 }
 
-.holdertokyo{
+
+.holdertokyo {
     max-width: 200px;
     max-height: 1000px;
     overflow: hidden;
 }
 
-.tokyo{
+.tokyo {
     width: 100%;
     -webkit-transition: all 0.8s ease;
     -moz-transition: all 0.8s ease;
     transition: all 0.8s ease;
 }
 
-.holdertokyo:hover{
-    transform: scale(2,2);
+.holdertokyo:hover {
+    transform: scale(2, 2);
 }
 
-h4{
+h4 {
     position: absolute;
     background-color: transparent !important;
     color: #DFE9E5;
@@ -103,7 +111,7 @@ section .back-link:hover {
     text-decoration: underline;
 }
 
-/* Footer styles */
+
 footer {
     background-color: #461B27;
     color: #CF9B95;
