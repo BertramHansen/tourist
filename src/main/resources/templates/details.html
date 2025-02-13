@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/frontpage.css">
+</head>
+<body>
+<form resource="" th:action="@{/name}" th:object="${touristAttraction}" method="get">
+    <header><h1 th:text="${touristAttraction.name}">:</h1></header>
+
+    <p th:text="${touristAttraction.description}"></p>
+    <br><br>
+</form>
+</body>
+</html>
