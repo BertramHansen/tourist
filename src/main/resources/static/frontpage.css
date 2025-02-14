@@ -68,29 +68,6 @@ section {
 }
 
 
-.holdertokyo {
-    max-width: 200px;
-    max-height: 1000px;
-    overflow: hidden;
-}
-
-.tokyo {
-    width: 100%;
-    -webkit-transition: all 0.8s ease;
-    -moz-transition: all 0.8s ease;
-    transition: all 0.8s ease;
-}
-
-.holdertokyo:hover {
-    transform: scale(2, 2);
-}
-
-h4 {
-    position: absolute;
-    background-color: transparent !important;
-    color: #DFE9E5;
-}
-
 section .images img {
     display: flex;
     justify-content: space-between;
