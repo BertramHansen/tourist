@@ -40,6 +40,11 @@ public class TouristController {
         return "details";
     }
 
+    @GetMapping("/all")
+    public String viewallAttactions(){
+        touristService.getAllAttractions();
+        return "all-attractions";
+    }
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
         TouristAttraction newAttraction = touristService.addAttraction(attraction);
