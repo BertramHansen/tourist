@@ -60,7 +60,7 @@ public class TouristController {
     @PostMapping("/update/{name}")
     public ResponseEntity<String> updateAttraction(@PathVariable String name,
                                                    @RequestBody TouristAttraction newAttraction){
-
+        //Hello
         String returnMessage = touristService.updateAttraction(name, newAttraction);
         System.out.println("We in the postmapping");
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
