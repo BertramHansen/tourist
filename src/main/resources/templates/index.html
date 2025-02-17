@@ -9,7 +9,7 @@
     <header>
         <h2></h2>
         <img th:class="logo" src="/logo.png" alt="logo image">
-        <div>
+        <nav>
             <fieldset class="dropDown">
                 <legend >MENU</legend>
                 <select id="Roll-Down" name="rolldown">
@@ -19,8 +19,9 @@
                     <option value="Kyoto">KYOTO</option>
                     <option value="Osaka">OSAKA</option>
                 </select>
+                <button type="submit">Gå til</button>
             </fieldset>
-        </div>
+        </nav>
     </header>
         <fieldset th:class="links">
             <p>Velkommen til turistguiden. Her kan du se turist attraktioner for hele Japan</p>
@@ -33,15 +34,15 @@
             </ul>
         </fieldset>
 <section>
-<div th:class="image-row">
-    <div class="holdertokyo">
+<nav th:class="image-row">
+    <nav class="holdertokyo">
         <img th:class="tokyo" src="/tokyo.jpg" alt="tokyo-img" style="width: 297px; margin-right: 5px;">
         <h4>TOKYO</h4>
-    </div>
+    </nav>
     <img th:class="osaka" src="osaka.jpg" alt="osaka-img" style="width: 297px; margin-right: 5px;">
     <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
     <img th:class="kyoto" src="kyoto1.jpg" alt="kyoto-img" style="width: 297px; margin-right: 5px;">
-</div>
+</nav>
 </section>
 
 <footer>
