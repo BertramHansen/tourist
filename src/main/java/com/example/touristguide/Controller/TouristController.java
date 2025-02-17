@@ -56,11 +56,30 @@ public class TouristController {
         model.addAttribute("attractions", attractions);
         return "attractionsList";
     }
-    @PostMapping("/add")
-    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
-        TouristAttraction newAttraction = touristService.addAttraction(attraction);
-        return new ResponseEntity<>(newAttraction, HttpStatus.CREATED);
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        TouristAttraction touristAttraction = new TouristAttraction();
+        model.addAttribute("touristAttraction", touristAttraction);
+        model.addAttribute("tags", AttractionTags.values());
+        return "add-form";
     }
+
+    @PostMapping("/add")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+        touristService.addAttraction(touristAttraction);
+        return "redirect:/attractions/all";
+    }
+
+
+    /*
+    @PostMapping("/add")
+    public String showAddForm(@RequestBody TouristAttraction attraction) {
+        TouristAttraction newAttraction = touristService.addAttraction(attraction);
+        return"add-form";
+    }
+
+     */
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<String> deleteAttraction(@PathVariable String name){
