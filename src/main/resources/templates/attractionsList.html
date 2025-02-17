@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/frontpage.css">
+    <title>Attractions List</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>By:</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="attraction : ${attractions}">
+                <th th:text="${attraction.name}"></th>
+                <th th:text="${attraction.description}"></th>
+                <th>By</th>
+                <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
+                <th> <a><button>opdatere</button></a></th>
+                <th><a><button>slet</button></a></th>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <a th:href="@{/attractions/add}"><button>Tilføj Attraction</button></a>
+</body>
+</html>

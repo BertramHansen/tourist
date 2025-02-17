@@ -1,7 +1,9 @@
 package com.example.touristguide.Controller;
 
+import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
+import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,23 +42,36 @@ public class TouristController {
         return "details";
     }
 
-    @GetMapping("/all")
-    public String viewallAttactions(){
-        touristService.getAllAttractions();
-        return "all-attractions";
+    @GetMapping("/{name}/tags")
+    public String getAttractionTagsByName(@PathVariable String name, Model model){
+        List<AttractionTags> tags = touristService.findAttractionByName(name).getTags();
+        model.addAttribute("attractionName" ,touristService.findAttractionByName(name).getName());
+        model.addAttribute("tags", tags);
+        return "tagList";
     }
 
-    // @PostMapping("/add")
-    //    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
-    //        TouristAttraction newAttraction = touristService.addAttraction(attraction);
-    //        return new ResponseEntity<>(newAttraction, HttpStatus.CREATED);
-    //    }
+    @GetMapping("/all")
+    public String viewallAttactions(Model model){
 
-    //display tilføjelse af attraction
-    @PostMapping("/add")
-    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
-        TouristAttraction newAttraction = touristService.addAttraction(attraction);
-        return new ResponseEntity<>(newAttraction, HttpStatus.CREATED);
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
+        model.addAttribute("attractions", attractions);
+        return "attractionsList";
+    }
+
+
+    //Add function
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        TouristAttraction touristAttraction = new TouristAttraction();
+        model.addAttribute("touristAttraction", touristAttraction);
+        model.addAttribute("tags", AttractionTags.values());
+        return "add-form";
+    }
+
+    @PostMapping("/save")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+        touristService.addAttraction(touristAttraction);
+        return "redirect:/attractions/all";
     }
 
     @PostMapping("/delete/{name}")

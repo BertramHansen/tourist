@@ -26,6 +26,10 @@ public class TouristService {
         return attraction;
     }
 
+    public TouristAttraction findAttractionByName(String name){
+        return touristRepository.findAttractionByName(name);
+    }
+
     public TouristAttraction addAttraction(TouristAttraction touristAttraction){
         return touristRepository.addTouristAttraction(touristAttraction);
     }
