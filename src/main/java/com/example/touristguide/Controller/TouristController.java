@@ -45,6 +45,14 @@ public class TouristController {
         touristService.getAllAttractions();
         return "all-attractions";
     }
+
+    // @PostMapping("/add")
+    //    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
+    //        TouristAttraction newAttraction = touristService.addAttraction(attraction);
+    //        return new ResponseEntity<>(newAttraction, HttpStatus.CREATED);
+    //    }
+
+    //display tilføjelse af attraction
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
         TouristAttraction newAttraction = touristService.addAttraction(attraction);
