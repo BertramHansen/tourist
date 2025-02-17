@@ -1,4 +1,5 @@
 
+
 * {
     margin: 0;
     padding: 0;
@@ -57,10 +58,12 @@ section {
 .links {
     background-color: #CF9B95;
     color: #302327;
+    font-weight: bolder;
     border-radius: inherit;
     align-self: center;
     padding: 20px;
 }
+
 
 .image-row {
     display: flex;
@@ -68,11 +71,20 @@ section {
 }
 
 
+
+
+
+
+
+
+/*
+
 section .images img {
     display: flex;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+/*
 
 
 section .back-link {
