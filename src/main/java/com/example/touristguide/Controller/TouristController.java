@@ -2,6 +2,7 @@ package com.example.touristguide.Controller;
 
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
+import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,11 @@ public class TouristController {
     }
 
     @GetMapping("/all")
-    public String viewallAttactions(){
-        touristService.getAllAttractions();
-        return "all-attractions";
+    public String viewallAttactions(Model model){
+
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
+        model.addAttribute("attractions", attractions);
+        return "attractionsList";
     }
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {

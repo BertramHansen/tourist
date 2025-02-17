@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/frontpage.css">
+    <title>Attractions List</title>
 </head>
 <body>
+    <table>
+        <tr th:each="attraction : ${attractions}">
+            <th th:text="${attraction.name}"></th>
+            <th th:text="${attraction.description}"></th>
+            <th><button>tags</button></th>
+        </tr>
+    </table>
 
+    <button>Tilføj Attraction</button>
 </body>
 </html>
