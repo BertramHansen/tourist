@@ -57,6 +57,8 @@ public class TouristController {
         return "attractionsList";
     }
 
+
+    //Add function
     @GetMapping("/add")
     public String showAddForm(Model model) {
         TouristAttraction touristAttraction = new TouristAttraction();
@@ -65,21 +67,11 @@ public class TouristController {
         return "add-form";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
         touristService.addAttraction(touristAttraction);
         return "redirect:/attractions/all";
     }
-
-
-    /*
-    @PostMapping("/add")
-    public String showAddForm(@RequestBody TouristAttraction attraction) {
-        TouristAttraction newAttraction = touristService.addAttraction(attraction);
-        return"add-form";
-    }
-
-     */
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<String> deleteAttraction(@PathVariable String name){
