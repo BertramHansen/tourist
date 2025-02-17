@@ -9,15 +9,19 @@
     <nav>
         <p>navigation</p>
     </nav>
+    <main>
+        <img th:class="fuji" src="/fuji.jpg" alt="fuji-img" style="width: 297px; margin-right: 5px;">
+        <h1>Turistguiden Japan</h1>
+        <p>Velkommen til turistguiden. Her kan du se turist attraktioner for hele Japan</p>
+        <a th:href="@{/attractions/all}" >Link to all attractions</a>
 
-    <p>Velkommen til turistguiden. Her kan du se turist attraktioner for hele Japan</p>
-    <a th:href="@{/attractions/all}" >Link to all attractions</a>
+        <ul>
+            <li><a th:href="@{/attractions/Fuji}" >Link to fuji</a></li>
+            <li><a th:href="@{/attractions/Tokyo Tower}">Link to Tokyo Tower</a></li>
+            <li><a th:href="@{/attractions/Nara Park}"> Link to Nara Park</a></li>
+        </ul>
+    </main>
 
-    <ul>
-        <li><a th:href="@{/attractions/Fuji}" >Link to fuji</a></li>
-        <li><a th:href="@{/attractions/Tokyo Tower}">Link to Tokyo Tower</a></li>
-        <li><a th:href="@{/attractions/Nara Park}"> Link to Nara Park</a></li>
-    </ul>
 
 
     <footer>
