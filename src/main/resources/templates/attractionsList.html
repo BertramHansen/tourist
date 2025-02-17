@@ -7,11 +7,24 @@
 </head>
 <body>
     <table>
-        <tr th:each="attraction : ${attractions}">
-            <th th:text="${attraction.name}"></th>
-            <th th:text="${attraction.description}"></th>
-            <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
+        <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>By:</th>
         </tr>
+        </thead>
+        <tbody>
+            <tr th:each="attraction : ${attractions}">
+                <th th:text="${attraction.name}"></th>
+                <th th:text="${attraction.description}"></th>
+                <th>By</th>
+                <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
+                <th> <a><button>opdatere</button></a></th>
+                <th><a><button>slet</button></a></th>
+            </tr>
+        </tbody>
+
     </table>
 
     <button>Tilføj Attraction</button>
