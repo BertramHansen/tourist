@@ -1,5 +1,6 @@
 package com.example.touristguide.Controller;
 
+import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
 import org.springframework.boot.Banner;
@@ -39,6 +40,13 @@ public class TouristController {
         model.addAttribute("name", touristAttraction.getName());
         model.addAttribute("description", touristAttraction.getDescription());
         return "details";
+    }
+
+    @GetMapping("/{name}/tags")
+    public String getAttractionTagsByName(@PathVariable String name, Model model){
+        List<AttractionTags> tags = touristService.findAttractionByName(name).getTags();
+        model.addAttribute("tags", tags);
+        return "tagList";
     }
 
     @GetMapping("/all")

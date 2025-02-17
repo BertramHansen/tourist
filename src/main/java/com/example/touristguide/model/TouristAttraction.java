@@ -51,4 +51,8 @@ public class TouristAttraction {
 
         return false;
     }
+
+    public List<AttractionTags> getTags(){
+        return tags;
+    }
 }
