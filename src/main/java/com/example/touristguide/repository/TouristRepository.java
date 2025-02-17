@@ -1,5 +1,6 @@
 package com.example.touristguide.repository;
 
+import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,9 @@ public class TouristRepository {
     }
 
     public void populateAttractions() {
+        attraction1.addTag(AttractionTags.MAD);
+        attraction1.addTag(AttractionTags.MONUMENT);
+        System.out.println(attraction1.getTags());
         attractions.add(attraction1);
         attractions.add(attraction2);
         attractions.add(attraction3);
