@@ -8,17 +8,28 @@ public class TouristAttraction {
     private String name;
     private String description;
     private List<AttractionTags> tags;
+    private AttractionCity city;
 
     public TouristAttraction(String name, String description){
         this.name = name;
         this.description = description;
         this.tags = new ArrayList<>();
+        this.city = AttractionCity.TOKYO;
     }
 
     public TouristAttraction(String name, String description, List<AttractionTags> tags){
         this.name = name;
         this.description = description;
         this.tags = tags;
+        this.city = AttractionCity.TOKYO;
+    }
+
+    public TouristAttraction(String name, String description, List<AttractionTags> tags, AttractionCity city){
+        this.name = name;
+        this.description = description;
+        this.tags = tags;
+        this.city = city;
+
     }
 
     public TouristAttraction(){
