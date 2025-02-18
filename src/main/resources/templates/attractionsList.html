@@ -20,7 +20,7 @@
                 <th th:text="${attraction.description}"></th>
                 <th>By</th>
                 <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
-                <th> <a><button>opdatere</button></a></th>
+                <th> <a th:href="@{/attractions/{name}/edit (name = ${attraction.getName()})}"><button>opdatere</button></a></th>
                 <th><a><button>slet</button></a></th>
             </tr>
         </tbody>

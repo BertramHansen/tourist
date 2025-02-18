@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Redigere Attraktion</title>
+</head>
+<body>
+    <h1>Redigerer NAVN</h1>
+    <form action="#" th:action="@{/attractions/update}" th:method="POST" th:object="${attraction}">
+        <label>Navn:</label>
+        <input type="text" th:field="*{name}" />
+
+        <label>Beskrivelse:</label>
+        <input type="text" th:field="*{description}"/>
+    </form>
+</body>
+</html>

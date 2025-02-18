@@ -1,5 +1,6 @@
 package com.example.touristguide.Controller;
 
+import com.example.touristguide.model.AttractionCity;
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/attractions")
@@ -80,6 +83,8 @@ public class TouristController {
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
     }
 
+
+    //------------------------------------UPDATE MAPPINGS:-----------------------------------------------------------
     @PostMapping("/update/{name}")
     public ResponseEntity<String> updateAttraction(@PathVariable String name,
                                                    @RequestBody TouristAttraction newAttraction){
@@ -87,6 +92,20 @@ public class TouristController {
         String returnMessage = touristService.updateAttraction(name, newAttraction);
         System.out.println("We in the postmapping");
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{name}/edit")
+    public String editForm(@PathVariable String name, Model model){
+
+        //test code, replace with the actual attraction the user clicked on
+        List<AttractionTags> tags = List.of(AttractionTags.BOERNEVENLIG, AttractionTags.SHOPPING);
+        TouristAttraction attraction = new TouristAttraction(
+                "Fuji-Q Highland",
+                "An amusement park near mount fuji",
+                tags,
+                AttractionCity.KAWASAKI);
+        model.addAttribute("attraction", attraction);
+        return "edit-form";
     }
 
 }

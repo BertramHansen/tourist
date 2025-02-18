@@ -70,4 +70,8 @@ public class TouristAttraction {
     public List<AttractionTags> getTags(){
         return tags;
     }
+
+    public void setTags(List<AttractionTags> tags){
+        this.tags = tags;
+    }
 }
