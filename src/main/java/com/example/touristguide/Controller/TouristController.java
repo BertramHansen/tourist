@@ -105,6 +105,7 @@ public class TouristController {
                 tags,
                 AttractionCity.KAWASAKI);
         model.addAttribute("attraction", attraction);
+        model.addAttribute("tags", AttractionTags.values());
         return "edit-form";
     }
 

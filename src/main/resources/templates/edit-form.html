@@ -5,13 +5,19 @@
     <title>Redigere Attraktion</title>
 </head>
 <body>
-    <h1>Redigerer NAVN</h1>
+    <h1 th:text=" 'Redigerer' + ${attraction.name}">Redigerer NAVN</h1>
     <form action="#" th:action="@{/attractions/update}" th:method="POST" th:object="${attraction}">
         <label>Navn:</label>
         <input type="text" th:field="*{name}" />
 
         <label>Beskrivelse:</label>
-        <input type="text" th:field="*{description}"/>
+        <textarea rows="10" cols="50" th:field="*{description}"></textarea>
+
+        <label>Tags:</label>
+        <label th:each="tag : ${tags}" th:text="${tag.displayName}">
+            <input type="checkbox" />
+        </label>
+        <label>By:</label>
     </form>
 </body>
 </html>
