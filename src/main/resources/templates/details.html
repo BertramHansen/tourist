@@ -6,14 +6,20 @@
     <link rel="stylesheet" href="/frontpage.css">
 </head>
 <body>
+
 <form resource="" th:action="@{/name}" th:object="${touristAttraction}" method="get">
-    <header><h1 th:text="${touristAttraction.name}">:</h1></header>
+    <header>
+        <img th:class="logo" src="/logo.png" alt="logo image">
+        <h1 th:text="${touristAttraction.name}">:</h1>
+    </header>
 
     <p th:text="${touristAttraction.description}"></p>
     <br><br>
 </form>
-<a href="http://localhost:8080"
-   target="_blank"> back to frontpage</a>
+<form th:class="styled-button" th:action="@{http://localhost:8080}" method="get">
+    <button type="submit" th:class="styled-button"> back to frontpage</button>
+</form>
+
 <footer>
     <p th:class="light-text"> Studiegruppe 2  <a href="https://github.com/BertramHansen/tourist" target="_blank"> github Repo</a></p>
 </footer>
