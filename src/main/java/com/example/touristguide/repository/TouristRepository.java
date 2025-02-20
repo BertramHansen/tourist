@@ -41,12 +41,15 @@ public class TouristRepository {
     }
 
     public TouristAttraction findAttractionByName(String name) {
+
         TouristAttraction result = null;
         for (TouristAttraction attraction : attractions) {
             if (attraction.getName().equalsIgnoreCase(name)) {
                 result = attraction;
+
             }
         }
+
         return result;
     }
 
@@ -66,15 +69,17 @@ public class TouristRepository {
     }
 
     public String updateAttraction(String name, TouristAttraction newAttraction){
-
+        System.out.println("tourist repo: " + name);
         for(TouristAttraction a : attractions){
             if(a.getName().equalsIgnoreCase(name)){
                 a.setName(newAttraction.getName());
                 a.setDescription(newAttraction.getDescription());
+                System.out.println("tourist repo: we found it");
                 return name + " has been updated to " + a.getName();
+
             }
         }
-
+        System.out.println("tourist repo: we didnt find it");
         return name + "was not found on the list";
     }
 

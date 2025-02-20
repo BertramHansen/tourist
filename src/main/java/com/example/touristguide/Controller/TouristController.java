@@ -85,6 +85,7 @@ public class TouristController {
 
 
     //------------------------------------UPDATE MAPPINGS:-----------------------------------------------------------
+    /*
     @PostMapping("/update/{name}")
     public ResponseEntity<String> updateAttraction(@PathVariable String name,
                                                    @RequestBody TouristAttraction newAttraction){
@@ -93,19 +94,35 @@ public class TouristController {
         System.out.println("We in the postmapping");
         return new ResponseEntity<>(returnMessage, HttpStatus.CREATED);
     }
+     */
+
+    @PostMapping("/update/{name}")
+    public String updateAttraction(@PathVariable String name,
+                                   Model model,
+                                   @ModelAttribute("attraction") TouristAttraction attraction){
+        System.out.println(name);
+        touristService.updateAttraction(name, attraction);
+        return "redirect:/attractions/all";
+    }
 
     @GetMapping("/{name}/edit")
-    public String editForm(@PathVariable String name, Model model){
+    public String editForm(@PathVariable String name,
+                           Model model){
 
         //test code, replace with the actual attraction the user clicked on
+        /*
         List<AttractionTags> tags = List.of(AttractionTags.BOERNEVENLIG, AttractionTags.SHOPPING);
         TouristAttraction attraction = new TouristAttraction(
                 "Fuji-Q Highland",
                 "An amusement park near mount fuji",
                 tags,
                 AttractionCity.KAWASAKI);
+
+         */
+        TouristAttraction attraction = touristService.findAttractionByName(name);
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", AttractionTags.values());
+        model.addAttribute("cities", AttractionCity.values());
         return "edit-form";
     }
 
