@@ -4,16 +4,13 @@ import com.example.touristguide.model.AttractionCity;
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/attractions")
@@ -54,7 +51,7 @@ public class TouristController {
     }
 
     @GetMapping("/all")
-    public String viewallAttactions(Model model){
+    public String viewAllAttractions(Model model){
 
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
