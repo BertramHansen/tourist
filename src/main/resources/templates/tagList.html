@@ -2,12 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/frontpage.css">
+
+      <link rel="stylesheet" href="/frontpage.css">
     <title>Title</title>
 </head>
 <body>
+<header>
     <h1 th:text="${attractionName} + ' Tags:'"></h1>
-    <table>
+</header>
+    <table class="dropDown">
         <tr th:each="tag : ${tags}">
             <th th:text="${tag.displayName}"></th>
         </tr>

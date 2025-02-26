@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Attraktion</title>
-    <link rel="stylesheet" href="/frontpage.css">
+    <link rel="stylesheet" href="/add-form-style.css">
 </head>
 <body>
+<header>
 <h1>Tilføj en ny turistattraktion</h1>
+</header>
 
 <form action="#" th:action="@{/attractions/save}" th:object="${touristAttraction}" method="post">
     <!-- name -->
