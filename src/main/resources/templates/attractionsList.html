@@ -21,7 +21,13 @@
                 <th>By</th>
                 <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
                 <th> <a th:href="@{/attractions/{name}/edit (name = ${attraction.getName()})}"><button>opdatere</button></a></th>
-                <th><a><button>slet</button></a></th>
+                <th>
+                <th>
+                    <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post"
+                          onsubmit="return confirm('Er du sikker på, at du vil slette denne attraktion?');">
+                        <button type="submit">Slet</button>
+                    </form>
+                </th>
             </tr>
         </tbody>
 
