@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Redigere Attraktion</title>
+</head>
+<body>
+    <h1 th:text=" 'Redigerer' + ${attraction.name}">Redigerer NAVN</h1>
+    <form action="#" th:action="@{/attractions/update/{name} (name=${attraction.getName()})}" th:method="POST" th:object="${attraction}">
+        <div>
+            <label>Navn:</label>
+            <input type="text" th:field="*{name}" />
+        </div>
+        <div>
+            <label>Beskrivelse:</label>
+            <textarea rows="10" cols="50" th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <label>Tags:</label>
+            <div th:each="tag:${tags}">
+                <label  th:text="${tag.displayName}">
+                </label>
+                <input type="checkbox" th:checked="${attraction.tags.contains(tag)}" />
+            </div>
+        </div>
+        <div>
+            <label>By:</label>
+            <div th:each="city : ${cities}">
+                <label th:text="${city.displayName}">
+                </label>
+                <input type="radio" name="cities" th:value="${city}">
+            </div>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+
+    </form>
+</body>
+</html>

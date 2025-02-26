@@ -39,6 +39,7 @@ public class TouristService {
     }
 
     public String updateAttraction(String name, TouristAttraction newAttraction){
+        System.out.println("Tourist service: we running");
         return touristRepository.updateAttraction(name, newAttraction);
     }
 }
