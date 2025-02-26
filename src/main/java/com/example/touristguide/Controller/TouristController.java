@@ -22,12 +22,6 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-//    @GetMapping("")
-//    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
-//        List<TouristAttraction> attractions = touristService.getAllAttractions();
-//        return new ResponseEntity<>(attractions, HttpStatus.OK);
-//    }
-
     @GetMapping("")
     public String getAllAttractions(){
         return "index";
@@ -65,6 +59,7 @@ public class TouristController {
         TouristAttraction touristAttraction = new TouristAttraction();
         model.addAttribute("touristAttraction", touristAttraction);
         model.addAttribute("tags", AttractionTags.values());
+        model.addAttribute("cities", AttractionCity.values());
         return "add-form";
     }
 

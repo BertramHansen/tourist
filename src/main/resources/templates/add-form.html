@@ -7,7 +7,7 @@
 </head>
 <body>
 <header>
-<h1>Tilføj en ny turistattraktion</h1>
+    <h1>Tilføj en ny turistattraktion</h1>
 </header>
 
 <form action="#" th:action="@{/attractions/save}" th:object="${touristAttraction}" method="post">
@@ -27,8 +27,15 @@
         <input type="checkbox" th:field="*{tags}" th:value="${tag}"/> <span th:text="${tag.displayName}"></span>
     </nav>
 
-        <!-- Knap til at indsende formular -->
-       <button type="submit">Tilføj Attraktion</button>
+    <label>By:</label>
+    <nav th:each="city : ${cities}">
+        <label th:text="${city.displayName}">
+        </label>
+        <input type="radio" name="cities" th:value="${city}">
+
+    </nav>
+    <!-- Knap til at indsende formular -->
+    <button type="submit">Tilføj Attraktion</button>
 
 </form>
 </body>
