@@ -3,7 +3,6 @@ package com.example.touristguide.Controller;
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -51,7 +50,7 @@ public class TouristController {
     }
 
     @GetMapping("/all")
-    public String viewallAttactions(Model model){
+    public String viewAllAttactions(Model model){
 
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);

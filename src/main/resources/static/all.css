@@ -1,0 +1,46 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #302327;
+    color: #CF9B95;
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+header .logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+header .dropDown {
+    background-color: #CA3E33;
+    color: #DFE9E5;
+    border: none;
+    padding: 10px;
+    width: 200px;
+    margin: auto;
+}
+
+header select {
+    width: 100%;
+    padding: 10px;
+    background-color: #6F99CC;
+    color: white;
+    border: none;
+    font-size: 1rem;
+}

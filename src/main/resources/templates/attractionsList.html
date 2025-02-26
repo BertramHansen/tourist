@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/frontpage.css">
+    <link rel="stylesheet" href="/add.css">
     <title>Attractions List</title>
 </head>
 <body>
+<header>
+    <h2></h2>
+    <img th:class="logo" src="/logo.png" alt="logo image">
+</header>
     <table>
         <thead>
         <tr>
             <th>Navn</th>
             <th>Beskrivelse</th>
-            <th>By:</th>
+            <th>By</th>
         </tr>
         </thead>
         <tbody>
@@ -28,5 +32,10 @@
     </table>
 
     <a th:href="@{/attractions/add}"><button>Tilføj Attraction</button></a>
+
+<footer>
+    <p th:class="light-text"> Studiegruppe 2 <a href="https://github.com/BertramHansen/tourist" target="_blank"> github
+        Repo</a></p>
+</footer>
 </body>
 </html>
