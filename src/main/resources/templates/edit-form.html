@@ -20,7 +20,7 @@
             <div th:each="tag:${tags}">
                 <label  th:text="${tag.displayName}">
                 </label>
-                <input type="checkbox" th:checked="${attraction.tags.contains(tag)}" />
+                <input type="checkbox" th:checked="${attraction.tags.contains(tag)}" th:field="*{tags}" th:value="${tag}" />
             </div>
         </div>
         <div>
