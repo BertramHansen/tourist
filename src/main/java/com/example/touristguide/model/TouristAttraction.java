@@ -74,4 +74,12 @@ public class TouristAttraction {
     public void setTags(List<AttractionTags> tags){
         this.tags = tags;
     }
+
+    public AttractionCity getCity(){
+        return city;
+    }
+
+    public void setCity(AttractionCity city){
+        this.city = city;
+    }
 }

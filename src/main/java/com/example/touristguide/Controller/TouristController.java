@@ -92,7 +92,6 @@ public class TouristController {
     public String updateAttraction(@PathVariable String name,
                                    Model model,
                                    @ModelAttribute("attraction") TouristAttraction attraction){
-        System.out.println(name);
         touristService.updateAttraction(name, attraction);
         return "redirect:/attractions/all";
     }

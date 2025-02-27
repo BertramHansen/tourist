@@ -28,7 +28,11 @@
             <div th:each="city : ${cities}">
                 <label th:text="${city.displayName}">
                 </label>
-                <input type="radio" name="cities" th:value="${city}">
+                <input type="radio"
+                       name="cities"
+                       th:value="${city}"
+                       th:checked="${attraction.city.equals(city)}"
+                       th:field="*{city}">
             </div>
         </div>
         <div>

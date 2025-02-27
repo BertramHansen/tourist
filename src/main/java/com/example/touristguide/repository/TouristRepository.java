@@ -34,7 +34,6 @@ public class TouristRepository {
     public void populateAttractions() {
         attraction1.addTag(AttractionTags.MAD);
         attraction1.addTag(AttractionTags.MONUMENT);
-        System.out.println(attraction1.getTags());
         attractions.add(attraction1);
         attractions.add(attraction2);
         attractions.add(attraction3);
@@ -69,18 +68,16 @@ public class TouristRepository {
     }
 
     public String updateAttraction(String name, TouristAttraction newAttraction){
-        System.out.println("tourist repo: " + name);
         for(TouristAttraction a : attractions){
             if(a.getName().equalsIgnoreCase(name)){
                 a.setName(newAttraction.getName());
                 a.setDescription(newAttraction.getDescription());
                 a.setTags(newAttraction.getTags());
-                System.out.println("tourist repo: we found it");
+                a.setCity(newAttraction.getCity());
                 return name + " has been updated to " + a.getName();
 
             }
         }
-        System.out.println("tourist repo: we didnt find it");
         return name + "was not found on the list";
     }
 
