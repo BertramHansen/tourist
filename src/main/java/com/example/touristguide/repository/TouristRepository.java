@@ -74,6 +74,7 @@ public class TouristRepository {
             if(a.getName().equalsIgnoreCase(name)){
                 a.setName(newAttraction.getName());
                 a.setDescription(newAttraction.getDescription());
+                a.setTags(newAttraction.getTags());
                 System.out.println("tourist repo: we found it");
                 return name + " has been updated to " + a.getName();
 
