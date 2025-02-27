@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
 
-      <link rel="stylesheet" href="/frontpage.css">
+      <link rel="stylesheet" href="/add.css">
     <title>Title</title>
 </head>
 <body>
 <header>
-    <h1 th:text="${attractionName} + ' Tags:'"></h1>
+    <h2></h2>
+    <img th:class="logo" src="/logo.png" alt="logo image">
 </header>
+<nav>
+    <h1 th:text="${attractionName} + ' Tags:'"></h1>
+</nav>
     <table class="dropDown">
         <tr th:each="tag : ${tags}">
             <th th:text="${tag.displayName}"></th>
@@ -18,6 +22,9 @@
     <a th:href="@{/attractions/all}">
         <button>Tilbage</button>
     </a>
-
+<footer>
+    <p th:class="light-text"> Studiegruppe 2 <a href="https://github.com/BertramHansen/tourist" target="_blank"> github
+        Repo</a></p>
+</footer>
 </body>
 </html>
