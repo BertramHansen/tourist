@@ -71,7 +71,7 @@ public class TouristRepository {
     public String updateAttraction(String name, TouristAttraction newAttraction){
         for(TouristAttraction a : attractions){
             if(a.getName().equalsIgnoreCase(name)){
-                a.setName(newAttraction.getName());
+                //a.setName(newAttraction.getName());
                 a.setDescription(newAttraction.getDescription());
                 a.setTags(newAttraction.getTags());
                 a.setCity(newAttraction.getCity());
