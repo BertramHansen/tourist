@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/frontpage.css">
+    <link rel="stylesheet" href="/add.css">
     <title>Attractions List</title>
 </head>
 <body>
+<header>
+    <h2></h2>
+    <img th:class="logo" src="/logo.png" alt="logo image">
+</header>
     <table>
         <thead>
         <tr>
             <th>Navn</th>
             <th>Beskrivelse</th>
-            <th>By:</th>
+            <th>By</th>
         </tr>
         </thead>
         <tbody>
@@ -21,12 +25,23 @@
                 <th th:text="${attraction.city.displayName}"></th>
                 <th><a th:href="@{/attractions/{name}/tags(name=${attraction.getName()})}"><button>tags</button></a></th>
                 <th> <a th:href="@{/attractions/{name}/edit (name = ${attraction.getName()})}"><button>opdatere</button></a></th>
-                <th><a><button>slet</button></a></th>
+                <th>
+                <th>
+                    <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post"
+                          onsubmit="return confirm('Er du sikker på, at du vil slette denne attraktion?');">
+                        <button type="submit">Slet</button>
+                    </form>
+                </th>
             </tr>
         </tbody>
 
     </table>
 
     <a th:href="@{/attractions/add}"><button>Tilføj Attraction</button></a>
+
+<footer>
+    <p th:class="light-text"> Studiegruppe 2 <a href="https://github.com/BertramHansen/tourist" target="_blank"> github
+        Repo</a></p>
+</footer>
 </body>
 </html>
