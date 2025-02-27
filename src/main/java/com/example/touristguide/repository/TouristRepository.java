@@ -33,6 +33,7 @@ public class TouristRepository {
 
     public void populateAttractions() {
         attraction1.addTag(AttractionTags.MAD);
+
         attraction1.addTag(AttractionTags.MONUMENT);
         attractions.add(attraction1);
         attractions.add(attraction2);
