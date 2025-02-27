@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/add.css">
     <title>Redigere Attraktion</title>
 </head>
 <body>
-    <h1 th:text=" 'Redigerer' + ${attraction.name}">Redigerer NAVN</h1>
+<header>
+    <h2></h2>
+    <img th:class="logo" src="/logo.png" alt="logo image">
+</header>
+    <h1 th:text=" 'Redigér ' + ${attraction.name}">Redigerer NAVN</h1>
     <form action="#" th:action="@{/attractions/update/{name} (name=${attraction.getName()})}" th:method="POST" th:object="${attraction}">
         <div>
             <label>Navn:</label>
@@ -36,5 +41,9 @@
         </div>
 
     </form>
+<footer>
+    <p th:class="light-text"> Studiegruppe 2 <a href="https://github.com/BertramHansen/tourist" target="_blank"> github
+        Repo</a></p>
+</footer>
 </body>
 </html>
