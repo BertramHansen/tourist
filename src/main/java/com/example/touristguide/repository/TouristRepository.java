@@ -2,6 +2,7 @@ package com.example.touristguide.repository;
 
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Repository
 public class TouristRepository {
 
+    private JdbcTemplate jdbcTemplate;
     private List<TouristAttraction> attractions = new ArrayList<>();
 
     TouristAttraction attraction1 = new TouristAttraction("Tokyo Tower", "the japanese Eiffeltower");
@@ -18,8 +20,9 @@ public class TouristRepository {
     TouristAttraction attraction3 = new TouristAttraction("Nara Park", "better known as the deer park, where you can get close to the animals and even give them treats.");
 
 
-    public TouristRepository() {
-        populateAttractions();
+    public TouristRepository( JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+        //populateAttractions();
     }
 
 

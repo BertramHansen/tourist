@@ -10,21 +10,21 @@ public class TouristAttraction {
     private List<AttractionTags> tags;
     private AttractionCity city;
 
-    public TouristAttraction(String name, String description){
+    public TouristAttraction(String name, String description) {
         this.name = name;
         this.description = description;
         this.tags = new ArrayList<>();
         this.city = AttractionCity.TOKYO;
     }
 
-    public TouristAttraction(String name, String description, List<AttractionTags> tags){
+    public TouristAttraction(String name, String description, List<AttractionTags> tags) {
         this.name = name;
         this.description = description;
         this.tags = tags;
         this.city = AttractionCity.TOKYO;
     }
 
-    public TouristAttraction(String name, String description, List<AttractionTags> tags, AttractionCity city){
+    public TouristAttraction(String name, String description, List<AttractionTags> tags, AttractionCity city) {
         this.name = name;
         this.description = description;
         this.tags = tags;
@@ -32,11 +32,11 @@ public class TouristAttraction {
 
     }
 
-    public TouristAttraction(){
+    public TouristAttraction() {
 
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -44,7 +44,7 @@ public class TouristAttraction {
         this.name = name;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -52,13 +52,13 @@ public class TouristAttraction {
         this.description = description;
     }
 
-    public void addTag(AttractionTags tag){
+    public void addTag(AttractionTags tag) {
         tags.add(tag);
     }
 
-    public boolean removeTag(AttractionTags tag){
-        for(AttractionTags t: tags){
-            if(t.equals(tag)){
+    public boolean removeTag(AttractionTags tag) {
+        for (AttractionTags t : tags) {
+            if (t.equals(tag)) {
                 tags.remove(tag);
                 return true;
             }
@@ -67,11 +67,11 @@ public class TouristAttraction {
         return false;
     }
 
-    public List<AttractionTags> getTags(){
+    public List<AttractionTags> getTags() {
         return tags;
     }
 
-    public void setTags(List<AttractionTags> tags){
+    public void setTags(List<AttractionTags> tags) {
         this.tags = tags;
     }
 
