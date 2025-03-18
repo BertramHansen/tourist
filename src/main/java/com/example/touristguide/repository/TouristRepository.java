@@ -55,11 +55,11 @@ public class TouristRepository {
 
 
     public TouristAttraction findAttractionByName(String name){
-        String sql = "SELECT * \n" +
+        String sql = "SELECT touristguidedatabase.touristattractions.*, touristguidedatabase.cities.cityName \n" +
                 "FROM touristguidedatabase.touristattractions \n" +
                 "LEFT JOIN touristguidedatabase.cities \n" +
                 "ON touristguidedatabase.touristattractions.city = touristguidedatabase.cities.cityID \n" +
-                "WHERE touristguidedatabase.touristattractions.attractionName = ?";
+                "WHERE touristguidedatabase.touristattractions.attractionName = ?\n";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,name);
         TouristAttraction attraction = null;
 
