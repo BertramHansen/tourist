@@ -34,7 +34,7 @@ public class TouristRepository {
 
     public List<TouristAttraction> getAllAttractions() {
         List<TouristAttraction> attractions = new ArrayList<>();
-        String sql = "SELECT * FROM touristguidedatabase.touristattractions";
+        String sql = "SELECT * FROM touristguidedatabase.touristattractions LEFT JOIN cities ON touristattractions.city = cities.cityID";
 
 
         try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
@@ -42,11 +42,7 @@ public class TouristRepository {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-
-                // List<AttractionTags> tagsList = jdbcTemplate.query();
-                //String citiesSql = "SELECT CityName FROM touristguidedatabase.cities WHERE CITYID = ?";
-                //ResultSet cityResultSet = statement.executeQuery(citiesSql);
-                TouristAttraction attraction = new TouristAttraction(resultSet.getString("attractionName"), resultSet.getString("description"));
+                TouristAttraction attraction = new TouristAttraction(resultSet.getString("attractionName"), resultSet.getString("description"), AttractionCity.valueOf(resultSet.getString("cityName").toUpperCase()));
                 attractions.add(attraction);
             }
 
@@ -59,7 +55,11 @@ public class TouristRepository {
 
 
     public TouristAttraction findAttractionByName(String name){
-        String sql = "SELECT * FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
+        String sql = "SELECT * \n" +
+                "FROM touristguidedatabase.touristattractions \n" +
+                "LEFT JOIN touristguidedatabase.cities \n" +
+                "ON touristguidedatabase.touristattractions.city = touristguidedatabase.cities.cityID \n" +
+                "WHERE touristguidedatabase.touristattractions.attractionName = ?";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,name);
         TouristAttraction attraction = null;
 
@@ -67,7 +67,7 @@ public class TouristRepository {
             String attractionName = rowSet.getString("attractionName");
             String description = rowSet.getString("description");
             List<AttractionTags> tags = new ArrayList<AttractionTags>(); //TODO: add tag functionality
-            AttractionCity city = AttractionCity.TOKYO; //TODO: actually get the city
+            AttractionCity city = AttractionCity.valueOf(rowSet.getString("cityName").toUpperCase()); //TODO: actually get the city
 
             attraction = new TouristAttraction(attractionName, description, tags, city);
 
