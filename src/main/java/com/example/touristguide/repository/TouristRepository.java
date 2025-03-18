@@ -93,9 +93,20 @@ public class TouristRepository {
 
 
     //TODO: ADD tags
-    public String updateAttraction(String name, TouristAttraction newAttraction){
-        String sql = "UPDATE touristguidedatabase.touristattractions SET  description = ?, city = ? WHERE attractionName = ?";
-        jdbcTemplate.update(sql, newAttraction.getDescription(), 1, name);
+    //Fra chatGPT i retrospekt tror jeg det ville være smartere at bruge String frem for Enum
+    public String updateAttraction(String name, TouristAttraction newAttraction) {
+        // SQL til at finde cityID baseret på ENUM-navnet
+        String cityIdQuery = "SELECT cityID FROM touristguidedatabase.cities WHERE cityName = ?";
+
+        // Finder cityID baseret på ENUM værdien
+        Integer cityId = jdbcTemplate.queryForObject(cityIdQuery, Integer.class, newAttraction.getCity().name());
+
+        // SQL til at opdatere turistattraktionen
+        String sql = "UPDATE touristguidedatabase.touristattractions SET description = ?, city = ? WHERE attractionName = ?";
+
+        // Opdaterer attraktionen med det fundne cityID
+        jdbcTemplate.update(sql, newAttraction.getDescription(), cityId, name);
+
         return "Attraction Updated";
     }
 
