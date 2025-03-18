@@ -93,7 +93,7 @@ public class TouristRepository {
 
 
     //TODO: ADD tags
-    //Fra chatGPT i retrospekt tror jeg det ville være smartere at bruge String frem for Enum
+    //Fra chatGPT i retrospekt tror jeg det ville være smartere at bruge String frem for Enums
     public String updateAttraction(String name, TouristAttraction newAttraction) {
         // SQL til at finde cityID baseret på ENUM-navnet
         String cityIdQuery = "SELECT cityID FROM touristguidedatabase.cities WHERE cityName = ?";
