@@ -10,6 +10,7 @@
     <h2></h2>
     <img th:class="logo" src="/logo.png" alt="logo image">
 </header>
+
     <h1 th:text=" 'Redigér ' + ${attraction.name}">Redigerer NAVN</h1>
     <form action="#" th:action="@{/attractions/update/{name} (name=${attraction.getName()})}" th:method="POST" th:object="${attraction}">
          <!-- <div>

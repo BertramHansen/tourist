@@ -1,9 +1,12 @@
 package com.example.touristguide.repository;
 
+import com.example.touristguide.model.AttractionCity;
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
+import com.example.touristguide.model.TouristAttractionRowmapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 
@@ -22,16 +25,10 @@ public class TouristRepository {
 
 
     private JdbcTemplate jdbcTemplate;
-    private List<TouristAttraction> attractions = new ArrayList<>();
-
-    TouristAttraction attraction1 = new TouristAttraction("Tokyo Tower", "the japanese Eiffeltower");
-    TouristAttraction attraction2 = new TouristAttraction("Fuji", "Mount Fuji is an active stratovolcano located on the Japanese island of Honshu");
-    TouristAttraction attraction3 = new TouristAttraction("Nara Park", "better known as the deer park, where you can get close to the animals and even give them treats.");
 
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        //populateAttractions();
     }
 
 
@@ -39,12 +36,16 @@ public class TouristRepository {
         List<TouristAttraction> attractions = new ArrayList<>();
         String sql = "SELECT * FROM touristguidedatabase.touristattractions";
 
+
         try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                List<AttractionTags> tagsList = new ArrayList<>();
+
+                // List<AttractionTags> tagsList = jdbcTemplate.query();
+                //String citiesSql = "SELECT CityName FROM touristguidedatabase.cities WHERE CITYID = ?";
+                //ResultSet cityResultSet = statement.executeQuery(citiesSql);
                 TouristAttraction attraction = new TouristAttraction(resultSet.getString("attractionName"), resultSet.getString("description"));
                 attractions.add(attraction);
             }
@@ -56,59 +57,46 @@ public class TouristRepository {
         return attractions;
     }
 
-    /* public void setAttractions(List<TouristAttraction> attractions) {
-        this.attractions = attractions;
-    }*/
 
-    public void populateAttractions() {
-        attraction1.addTag(AttractionTags.MAD);
+    public TouristAttraction findAttractionByName(String name){
+        String sql = "SELECT * FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,name);
+        TouristAttraction attraction = null;
 
-        attraction1.addTag(AttractionTags.MONUMENT);
-        attractions.add(attraction1);
-        attractions.add(attraction2);
-        attractions.add(attraction3);
-    }
+        if (rowSet.next()) {
+            String attractionName = rowSet.getString("attractionName");
+            String description = rowSet.getString("description");
+            List<AttractionTags> tags = new ArrayList<AttractionTags>(); //TODO: add tag functionality
+            AttractionCity city = AttractionCity.TOKYO; //TODO: actually get the city
 
-    public TouristAttraction findAttractionByName(String name) {
+            attraction = new TouristAttraction(attractionName, description, tags, city);
 
-        TouristAttraction result = null;
-        for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                result = attraction;
-
-            }
+            return attraction;
+        }
+        else{
+            System.out.println("FindAttractionByName returned null");
+            return null;
         }
 
-        return result;
     }
 
-    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) {
-        attractions.add(touristAttraction);
-        return touristAttraction;
+    public void addTouristAttraction(TouristAttraction touristAttraction){
+        String sql = "INSERT IGNORE INTO touristAttractions (attractionName, description, tagsID, city) VALUES(?,?,?,?)";
+        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1,1); //TODO få city og tags til at virke
     }
-
     public String deleteAttraction(String name) {
-        for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                attractions.remove(attraction); // Fjerner attraktionen fra listen
-                return attraction.getName() + " is deleted from the list";
-            }
-        }
-        return name + " was not found on the list";
+        String sql = "DELETE FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
+        jdbcTemplate.update(sql,name);
+        return "Delete succes";
     }
 
-    public String updateAttraction(String name, TouristAttraction newAttraction) {
-        for (TouristAttraction a : attractions) {
-            if (a.getName().equalsIgnoreCase(name)) {
-                //a.setName(newAttraction.getName());
-                a.setDescription(newAttraction.getDescription());
-                a.setTags(newAttraction.getTags());
-                a.setCity(newAttraction.getCity());
-                return name + " has been updated to " + a.getName();
 
-            }
-        }
-        return name + "was not found on the list";
+
+    //TODO: ADD tags
+    public String updateAttraction(String name, TouristAttraction newAttraction){
+        String sql = "UPDATE touristguidedatabase.touristattractions SET  description = ?, city = ? WHERE attractionName = ?";
+        jdbcTemplate.update(sql, newAttraction.getDescription(), 1, name);
+        return "Attraction Updated";
     }
 
 }

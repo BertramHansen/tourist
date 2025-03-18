@@ -31,6 +31,12 @@ public class TouristAttraction {
         this.city = city;
 
     }
+    public TouristAttraction(String name, String description, AttractionCity city) {
+        this.name = name;
+        this.description = description;
+        this.city = city;
+
+    }
 
     public TouristAttraction() {
 
