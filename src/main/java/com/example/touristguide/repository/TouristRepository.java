@@ -2,15 +2,24 @@ package com.example.touristguide.repository;
 
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class TouristRepository {
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
+
 
     private JdbcTemplate jdbcTemplate;
     private List<TouristAttraction> attractions = new ArrayList<>();
@@ -20,19 +29,36 @@ public class TouristRepository {
     TouristAttraction attraction3 = new TouristAttraction("Nara Park", "better known as the deer park, where you can get close to the animals and even give them treats.");
 
 
-    public TouristRepository( JdbcTemplate jdbcTemplate){
+    public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         //populateAttractions();
     }
 
 
     public List<TouristAttraction> getAllAttractions() {
+        List<TouristAttraction> attractions = new ArrayList<>();
+        String sql = "SELECT * FROM touristguidedatabase.touristattractions";
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                List<AttractionTags> tagsList = new ArrayList<>();
+                TouristAttraction attraction = new TouristAttraction(resultSet.getString("attractionName"), resultSet.getString("description"));
+                attractions.add(attraction);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return attractions;
     }
 
-    public void setAttractions(List<TouristAttraction> attractions) {
+    /* public void setAttractions(List<TouristAttraction> attractions) {
         this.attractions = attractions;
-    }
+    }*/
 
     public void populateAttractions() {
         attraction1.addTag(AttractionTags.MAD);
@@ -71,9 +97,9 @@ public class TouristRepository {
         return name + " was not found on the list";
     }
 
-    public String updateAttraction(String name, TouristAttraction newAttraction){
-        for(TouristAttraction a : attractions){
-            if(a.getName().equalsIgnoreCase(name)){
+    public String updateAttraction(String name, TouristAttraction newAttraction) {
+        for (TouristAttraction a : attractions) {
+            if (a.getName().equalsIgnoreCase(name)) {
                 //a.setName(newAttraction.getName());
                 a.setDescription(newAttraction.getDescription());
                 a.setTags(newAttraction.getTags());
