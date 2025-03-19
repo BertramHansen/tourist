@@ -25,6 +25,7 @@ public class TouristController {
     @GetMapping("")
     public String getAllAttractions() {
         return "index";
+        
     }
 
     @GetMapping("/{name}")
