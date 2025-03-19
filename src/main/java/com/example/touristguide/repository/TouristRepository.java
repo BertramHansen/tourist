@@ -15,14 +15,14 @@ import java.util.List;
 
 @Repository
 public class TouristRepository {
-    @Value("${spring.datasource.url}")
+   /* @Value("${spring.datasource.url}")
     private String dbUrl;
     @Value("${spring.datasource.username}")
     private String username;
     @Value("${spring.datasource.password}")
     private String password;
 
-
+*/
     private JdbcTemplate jdbcTemplate;
 
 
@@ -31,11 +31,11 @@ public class TouristRepository {
     }
 
 
-    public List<TouristAttraction> getAllAttractions() {
+    public TouristAttraction getAllAttractions() {
         List<TouristAttraction> attractions = new ArrayList<>();
         String sql = "SELECT * FROM touristguidedatabase.touristattractions LEFT JOIN cities ON touristattractions.city = cities.cityID";
 
-
+/*
         try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -48,8 +48,9 @@ public class TouristRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return attractions;
+*/
+        //return attractions;
+        return jdbcTemplate.queryForObject(sql, TouristAttraction.class);
     }
 
 
