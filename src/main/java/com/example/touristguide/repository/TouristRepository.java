@@ -3,7 +3,6 @@ package com.example.touristguide.repository;
 import com.example.touristguide.model.AttractionCity;
 import com.example.touristguide.model.AttractionTags;
 import com.example.touristguide.model.TouristAttraction;
-import com.example.touristguide.model.TouristAttractionRowmapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
