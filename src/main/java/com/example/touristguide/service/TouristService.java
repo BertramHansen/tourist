@@ -14,7 +14,7 @@ public class TouristService {
     this.touristRepository = touristRepository;
     }
 
-    public TouristAttraction getAllAttractions(){
+    public List<TouristAttraction> getAllAttractions(){
         return touristRepository.getAllAttractions();
     }
 

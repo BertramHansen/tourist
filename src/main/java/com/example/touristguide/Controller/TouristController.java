@@ -25,7 +25,6 @@ public class TouristController {
     @GetMapping("")
     public String getAllAttractions() {
         return "index";
-        
     }
 
     @GetMapping("/{name}")
@@ -47,7 +46,7 @@ public class TouristController {
 
     @GetMapping("/all")
     public String viewAllAttractions(Model model) {
-       TouristAttraction attractions = touristService.getAllAttractions();
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
         return "attractionsList";
     }
