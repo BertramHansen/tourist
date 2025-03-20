@@ -80,9 +80,13 @@ public class TouristRepository {
     }
 
     public void addTouristAttraction(TouristAttraction touristAttraction){
+
+        int cityId = getCityId(touristAttraction.getCity().getDisplayName());
+
         String sql = "INSERT IGNORE INTO touristAttractions (attractionName, description, tagsID, city) VALUES(?,?,?,?)";
-        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1,1); //TODO få city og tags til at virke
+        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId); //TODO få city og tags til at virke
     }
+
     public String deleteAttraction(String name) {
         String sql = "DELETE FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
         jdbcTemplate.update(sql,name);
@@ -107,6 +111,14 @@ public class TouristRepository {
         jdbcTemplate.update(sql, newAttraction.getDescription(), cityId, name);
 
         return "Attraction Updated";
+    }
+
+    public int getCityId(String name){
+        String cityIdQuery = "SELECT cityID FROM touristguidedatabase.cities WHERE cityName = ?";
+
+        Integer cityId = jdbcTemplate.queryForObject(cityIdQuery, Integer.class, name);
+
+        return cityId;
     }
 
 }
