@@ -75,7 +75,7 @@ public class TouristRepository {
             SqlRowSet tagRowSet = jdbcTemplate.queryForRowSet(tagSql,attractionName);
             List<AttractionTags> tags = new ArrayList<AttractionTags>(); //TODO: add tag functionality
             while(tagRowSet.next()){
-                tags.add(AttractionTags.valueOf(tagRowSet.getString("tagName")));
+                tags.add(AttractionTags.valueOf(tagRowSet.getString("tagName").toUpperCase()));
             }
             AttractionCity city = AttractionCity.valueOf(rowSet.getString("cityName").toUpperCase()); //TODO: actually get the city
 
