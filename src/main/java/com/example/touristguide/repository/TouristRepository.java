@@ -73,11 +73,11 @@ public class TouristRepository {
             String description = rowSet.getString("description");
 
             SqlRowSet tagRowSet = jdbcTemplate.queryForRowSet(tagSql,attractionName);
-            List<AttractionTags> tags = new ArrayList<AttractionTags>(); //TODO: add tag functionality
+            List<AttractionTags> tags = new ArrayList<AttractionTags>();
             while(tagRowSet.next()){
                 tags.add(AttractionTags.valueOf(tagRowSet.getString("tagName").toUpperCase().trim()));
             }
-            AttractionCity city = AttractionCity.valueOf(rowSet.getString("cityName").toUpperCase()); //TODO: actually get the city
+            AttractionCity city = AttractionCity.valueOf(rowSet.getString("cityName").toUpperCase());
 
             attraction = new TouristAttraction(attractionName, description, tags, city);
 
@@ -95,7 +95,24 @@ public class TouristRepository {
         int cityId = getCityId(touristAttraction.getCity().getDisplayName());
 
         String sql = "INSERT IGNORE INTO touristAttractions (attractionName, description, tagsID, city) VALUES(?,?,?,?)";
-        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId); //TODO få city og tags til at virke
+
+        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId); //TODO få tags til at virke
+
+        //adding tags to the many to many table:
+        //first we get the attractions ID
+        String getAttractionIdSql = "SELECT attractionID FROM touristAttractions WHERE attractionName = ?";
+        SqlRowSet attractionIdSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, touristAttraction.getName());
+        int attractionID = attractionIdSet.getInt("attractionID");
+
+        String getTagIdSql = "SELECT tagID FROM tags WHERE tagName= ? ";
+        String insertTagRelationSql = "INSERT IGNORE into attractionsToTags (attractionID, tagID) VALUES(?,?)";
+        for(AttractionTags tag: touristAttraction.getTags()){
+            SqlRowSet tagIDRowset = jdbcTemplate.queryForRowSet(getTagIdSql, tag.getDisplayName());
+            int tagID = tagIDRowset.getInt("tagID");
+            jdbcTemplate.update(insertTagRelationSql, attractionID, tagID);
+
+
+        }
     }
 
     public String deleteAttraction(String name) {
