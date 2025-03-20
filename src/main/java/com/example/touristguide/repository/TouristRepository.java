@@ -62,10 +62,21 @@ public class TouristRepository {
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql,name);
         TouristAttraction attraction = null;
 
+        String tagSql = "SELECT * FROM touristattractions\n" +
+                "JOIN attractionstotags ON touristattractions.attractionID = attractionstotags.attractionID\n" +
+                "JOIN tags ON attractionstotags.tagID = tags.tagID\n" +
+                "WHERE touristattractions.attractionName = ? ;";
+
+
         if (rowSet.next()) {
             String attractionName = rowSet.getString("attractionName");
             String description = rowSet.getString("description");
+
+            SqlRowSet tagRowSet = jdbcTemplate.queryForRowSet(tagSql,attractionName);
             List<AttractionTags> tags = new ArrayList<AttractionTags>(); //TODO: add tag functionality
+            while(tagRowSet.next()){
+                tags.add(AttractionTags.valueOf(tagRowSet.getString("tagName")));
+            }
             AttractionCity city = AttractionCity.valueOf(rowSet.getString("cityName").toUpperCase()); //TODO: actually get the city
 
             attraction = new TouristAttraction(attractionName, description, tags, city);
