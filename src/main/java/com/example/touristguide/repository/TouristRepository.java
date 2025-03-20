@@ -98,40 +98,21 @@ public class TouristRepository {
 
         jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId);
 
-        //adding tags to the many to many table:
-        //first we get the attractions ID
-        String getAttractionIdSql = "SELECT attractionID FROM touristAttractions WHERE attractionName = ?";
-        SqlRowSet attractionIdSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, touristAttraction.getName());
-        attractionIdSet.next();
-        int attractionID = attractionIdSet.getInt("attractionID");
+        addTags(touristAttraction);
 
-        String getTagIdSql = "SELECT tagID FROM tags WHERE tagName= ? ";
-        String insertTagRelationSql = "INSERT IGNORE into attractionsToTags (attractionID, tagID) VALUES(?,?)";
-        for(AttractionTags tag: touristAttraction.getTags()){
-            SqlRowSet tagIDRowset = jdbcTemplate.queryForRowSet(getTagIdSql, tag.getDisplayName());
-            tagIDRowset.next();
-            int tagID = tagIDRowset.getInt("tagID");
-            jdbcTemplate.update(insertTagRelationSql, attractionID, tagID);
-
-
-        }
     }
 
-    //TODO: TAGS
+
     public String deleteAttraction(String name) {
 
-        //handling tag relations:
-        String getAttractionIdSql = "SELECT attractionID FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
-        SqlRowSet attractionIDSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, name);
-        attractionIDSet.next();
-        int attractionID = attractionIDSet.getInt("attractionID");
-        String deleteTagsSql = "DELETE FROM touristguidedatabase.attractionsToTags WHERE attractionID = ?";
-        jdbcTemplate.update(deleteTagsSql, attractionID);
+        deleteTags(name);
 
         String sql = "DELETE FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
         jdbcTemplate.update(sql,name);
         return "Delete succes";
     }
+
+
 
 
 
@@ -150,6 +131,10 @@ public class TouristRepository {
         // Opdaterer attraktionen med det fundne cityID
         jdbcTemplate.update(sql, newAttraction.getDescription(), cityId, name);
 
+        //handling tags:
+        deleteTags(name);
+        addTags(newAttraction);
+
         return "Attraction Updated";
     }
 
@@ -159,6 +144,37 @@ public class TouristRepository {
         Integer cityId = jdbcTemplate.queryForObject(cityIdQuery, Integer.class, name);
 
         return cityId;
+    }
+
+
+    private void deleteTags(String name){
+        //handling tag relations:
+        String getAttractionIdSql = "SELECT attractionID FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
+        SqlRowSet attractionIDSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, name);
+        attractionIDSet.next();
+        int attractionID = attractionIDSet.getInt("attractionID");
+        String deleteTagsSql = "DELETE FROM touristguidedatabase.attractionsToTags WHERE attractionID = ?";
+        jdbcTemplate.update(deleteTagsSql, attractionID);
+    }
+
+    private void addTags(TouristAttraction touristAttraction){
+        //adding tags to the many to many table:
+        //first we get the attractions ID
+        String getAttractionIdSql = "SELECT attractionID FROM touristAttractions WHERE attractionName = ?";
+        SqlRowSet attractionIdSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, touristAttraction.getName());
+        attractionIdSet.next();
+        int attractionID = attractionIdSet.getInt("attractionID");
+
+        String getTagIdSql = "SELECT tagID FROM tags WHERE tagName= ? ";
+        String insertTagRelationSql = "INSERT IGNORE into attractionsToTags (attractionID, tagID) VALUES(?,?)";
+        for(AttractionTags tag: touristAttraction.getTags()){
+            SqlRowSet tagIDRowset = jdbcTemplate.queryForRowSet(getTagIdSql, tag.getDisplayName());
+            tagIDRowset.next();
+            int tagID = tagIDRowset.getInt("tagID");
+            jdbcTemplate.update(insertTagRelationSql, attractionID, tagID);
+
+
+        }
     }
 
 }
