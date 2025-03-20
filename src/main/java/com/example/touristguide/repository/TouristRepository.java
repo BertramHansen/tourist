@@ -96,18 +96,20 @@ public class TouristRepository {
 
         String sql = "INSERT IGNORE INTO touristAttractions (attractionName, description, tagsID, city) VALUES(?,?,?,?)";
 
-        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId); //TODO få tags til at virke
+        jdbcTemplate.update(sql, touristAttraction.getName(), touristAttraction.getDescription(), 1, cityId);
 
         //adding tags to the many to many table:
         //first we get the attractions ID
         String getAttractionIdSql = "SELECT attractionID FROM touristAttractions WHERE attractionName = ?";
         SqlRowSet attractionIdSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, touristAttraction.getName());
+        attractionIdSet.next();
         int attractionID = attractionIdSet.getInt("attractionID");
 
         String getTagIdSql = "SELECT tagID FROM tags WHERE tagName= ? ";
         String insertTagRelationSql = "INSERT IGNORE into attractionsToTags (attractionID, tagID) VALUES(?,?)";
         for(AttractionTags tag: touristAttraction.getTags()){
             SqlRowSet tagIDRowset = jdbcTemplate.queryForRowSet(getTagIdSql, tag.getDisplayName());
+            tagIDRowset.next();
             int tagID = tagIDRowset.getInt("tagID");
             jdbcTemplate.update(insertTagRelationSql, attractionID, tagID);
 
