@@ -117,7 +117,17 @@ public class TouristRepository {
         }
     }
 
+    //TODO: TAGS
     public String deleteAttraction(String name) {
+
+        //handling tag relations:
+        String getAttractionIdSql = "SELECT attractionID FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
+        SqlRowSet attractionIDSet = jdbcTemplate.queryForRowSet(getAttractionIdSql, name);
+        attractionIDSet.next();
+        int attractionID = attractionIDSet.getInt("attractionID");
+        String deleteTagsSql = "DELETE FROM touristguidedatabase.attractionsToTags WHERE attractionID = ?";
+        jdbcTemplate.update(deleteTagsSql, attractionID);
+
         String sql = "DELETE FROM touristguidedatabase.touristattractions WHERE attractionName = ?";
         jdbcTemplate.update(sql,name);
         return "Delete succes";
